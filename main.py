@@ -15,12 +15,11 @@ def main():
         }
         
         if potential_script not in built_in_commands and not potential_script.startswith("-"):
-            # Try to run as script
+            # Try to run as script - if found, this will REPLACE nlpm process
+            # and NEVER return (gives script full terminal control)
             script_args = sys.argv[2:]  # Pass remaining args to script
-            success, exit_code = script_manager.find_and_run_script([potential_script] + script_args)
-            if success:
-                sys.exit(exit_code if exit_code is not None else 0)
-            # If not a script, continue to argparse (will show error)
+            found = script_manager.find_and_run_script([potential_script] + script_args)
+            # If we get here, script wasn't found - continue to argparse
     
     # Setup argparse for built-in commands
     parser = argparse.ArgumentParser(prog="nlpm", description="NeverLiie Package Manager")
