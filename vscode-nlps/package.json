@@ -1,0 +1,33 @@
+{
+  "name": "nlps",
+  "displayName": "NLPS Language Support",
+  "description": "Language support for Never Liie Package Script (NLPS)",
+  "version": "0.1.0",
+  "publisher": "neverliie",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "nlps",
+        "aliases": ["NLPS", "nlps", "Never Liie Package Script"],
+        "extensions": [".nlps"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nlps",
+        "scopeName": "source.nlps",
+        "path": "./syntaxes/nlps.tmLanguage.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neverliie/nlpm"
+  }
+}
