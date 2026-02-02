@@ -8,7 +8,7 @@
 
 ; Define basic constants
 !define PRODUCT_NAME "NeverLiie Package Manager"
-!define PRODUCT_VERSION "0.1.1"
+!define PRODUCT_VERSION "0.3.3"
 !define PRODUCT_PUBLISHER "Liiesl"
 !define EXE_NAME "nlpm.exe"
 !define SOURCE_EXE "main.exe" 
