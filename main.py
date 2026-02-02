@@ -10,7 +10,8 @@ def main():
         # Don't treat built-in commands or flags as script names
         built_in_commands = {
             "init-lib", "register", "publish", "install", "update", "list",
-            "init-script", "register-script", "list-scripts", "help", "--help", "-h",
+            "init-script", "register-script", "list-scripts",
+            "help", "--help", "-h",
             "--version", "-v"
         }
         
