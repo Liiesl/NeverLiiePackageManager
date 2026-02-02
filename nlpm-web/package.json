@@ -1,0 +1,17 @@
+{
+  "name": "nlpm-web",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "preact": "^10.28.2",
+    "preact-render-to-string": "^6.6.5"
+  }
+}

@@ -1,0 +1,7 @@
+*.exe
+*.dist/
+*.app/
+.venv/
+node_modules/
+.DS_Store
+nul

@@ -1,0 +1,5 @@
+name: cool-library-here
+version: 0.1.0
+description: A short description of my library
+source_dir: ./
+import_name: my_library

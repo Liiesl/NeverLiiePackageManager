@@ -1,0 +1,5 @@
+name: nlpm-web
+description: site for nlpm
+command: bun run server.ts
+cwd: E:\vibecode project\NeverLiiePackageManager\nlpm-web
+env: {}
