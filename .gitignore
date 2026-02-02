@@ -1,7 +1,9 @@
 *.exe
 *.dist/
-*.app/
+*.build/
 .venv/
 node_modules/
 .DS_Store
 nul
+__pycache__/
+*.pyc
