@@ -36,6 +36,7 @@ class Assignment:
 @dataclass
 class RunCommand:
     command: StringLiteral
+    detach: bool = False
 
 @dataclass
 class CdCommand:
@@ -191,6 +192,12 @@ class Parser:
         self.advance()  # consume 'run'
         self.skip_newlines()
         
+        # Check for detach modifier
+        detach = False
+        if self.match(TokenType.IDENTIFIER) and self.current().value == 'detach':
+            detach = True
+            self.advance()  # consume 'detach'
+        
         # The rest of the line is the command string
         cmd_parts = []
         while not self.match(TokenType.NEWLINE, TokenType.EOF, TokenType.COMMENT):
@@ -236,7 +243,7 @@ class Parser:
                 cmd_parts.append(self.advance().value)
         
         command_str = ' '.join(cmd_parts)
-        return RunCommand(self.create_string_literal(command_str))
+        return RunCommand(self.create_string_literal(command_str), detach=detach)
     
     def parse_cd(self) -> CdCommand:
         self.advance()  # consume 'cd'

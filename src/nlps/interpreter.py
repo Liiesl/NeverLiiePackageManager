@@ -191,11 +191,41 @@ class Interpreter:
         """Execute a run command via subprocess"""
         command = self.evaluate(stmt.command)
         
-        print(f"[nlps] {command}")
+        if stmt.detach:
+            print(f"[nlps] {command} (detached)")
+        else:
+            print(f"[nlps] {command}")
         
         # Execute command
         try:
-            if os.name == 'nt':
+            if stmt.detach:
+                # Detached execution - run in background without waiting
+                if os.name == 'nt':
+                    # Windows: Use CREATE_NEW_PROCESS_GROUP for proper detachment
+                    subprocess.Popen(
+                        command,
+                        shell=True,
+                        cwd=self.cwd,
+                        env=self.environment,
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                        stdin=subprocess.DEVNULL,
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL
+                    )
+                else:
+                    # Unix: Run in background
+                    args = shlex.split(command)
+                    if args:
+                        subprocess.Popen(
+                            args,
+                            cwd=self.cwd,
+                            env=self.environment,
+                            stdin=subprocess.DEVNULL,
+                            stdout=subprocess.DEVNULL,
+                            stderr=subprocess.DEVNULL,
+                            start_new_session=True
+                        )
+            elif os.name == 'nt':
                 # Windows: use shell=True for proper terminal I/O
                 result = subprocess.run(
                     command,
