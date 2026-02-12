@@ -49,7 +49,7 @@ def get_dir(args):
     
     if alias not in registry:
         logger.error(f"Alias not found: '{alias}'")
-        print(f"Run 'nlpm list-dirs' to see registered aliases", file=sys.stderr)
+        print(f"Run 'nlpm list dirs' to see registered aliases", file=sys.stderr)
         sys.exit(1)
     
     path = registry[alias]
@@ -101,7 +101,7 @@ def register_dir(args):
         print(f"  Current: {existing_path}")
         print(f"  New:     {path}")
         print(f"\nUse --force to overwrite:")
-        print(f"  nlpm register-dir --force {alias}")
+        print(f"  nlpm register dir --force {alias}")
         sys.exit(1)
     
     # Register the alias
@@ -137,7 +137,7 @@ def list_dirs(args):
     
     if not registry:
         print("No directories registered.")
-        print(f"Register one with: nlpm register-dir <alias>")
+        print(f"Register one with: nlpm register dir <alias>")
         return
     
     print("Registered Directories:")

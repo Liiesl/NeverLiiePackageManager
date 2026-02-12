@@ -39,7 +39,7 @@ def init_script(args):
     
     save_yaml(config.SCRIPT_CONFIG_FILE, template)
     logger.info(f"Created {config.SCRIPT_CONFIG_FILE}")
-    logger.info("Edit it, then run: nlpm register-script")
+    logger.info("Edit it, then run: nlpm register script")
 
 
 def transpile_to_nlps(script_data: dict) -> str:
@@ -75,7 +75,7 @@ def register_script(args):
     script_config_path = Path(config.SCRIPT_CONFIG_FILE)
     
     if not script_config_path.exists():
-        logger.error(f"{config.SCRIPT_CONFIG_FILE} not found. Run 'nlpm init-script' first.")
+        logger.error(f"{config.SCRIPT_CONFIG_FILE} not found. Run 'nlpm init script' first.")
         return
     
     script_data = load_yaml(script_config_path)
@@ -95,8 +95,8 @@ def register_script(args):
     
     # Check for reserved names (built-in commands)
     reserved_commands = {
-        "init-lib", "register", "publish", "install", "update", "list",
-        "init-script", "register-script", "list-scripts", "help", "--help", "-h"
+        "init", "list", "register", "publish", "install", "update",
+        "cdr", "remove-dir", "cdr-init", "help", "--help", "-h"
     }
     
     if name in reserved_commands:
