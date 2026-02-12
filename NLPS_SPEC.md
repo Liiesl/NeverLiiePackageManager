@@ -145,6 +145,24 @@ $filename = "data.txt"
 run cat ${filename}
 ```
 
+#### Detached Execution
+
+Add `detach` after `run` to execute commands in the background without blocking:
+
+```nlps
+# Run GUI application without blocking script
+run detach pythonw my_gui_app.py
+
+# Start background service
+run detach python my_background_service.py
+```
+
+Detached processes:
+- Run in the background (script continues immediately)
+- Are detached from the terminal (continue even if terminal closes)
+- Redirect stdin/stdout/stderr to null (clean daemon mode)
+- Platform-appropriate handling (Windows uses `CREATE_NEW_PROCESS_GROUP`, Unix uses `start_new_session`)
+
 ### Change Directory
 
 ```nlps
@@ -378,7 +396,7 @@ statement       ::= assignment
 
 assignment      ::= (identifier | var_ref) "=" expression
 
-run_command     ::= "run" command_string
+run_command     ::= "run" ["detach"] command_string
 
 cd_command      ::= "cd" expression
 
@@ -442,6 +460,7 @@ nlps script.nlps
 
 - **v0.1.0** - Initial release with basic commands, variables, and control flow
 - **v0.2.0** - Added functions, parallel execution, and platform-specific blocks
+- **v0.3.0** - Added `run detach` for background process execution
 
 ---
 

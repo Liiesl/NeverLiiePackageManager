@@ -1,7 +1,7 @@
 # main.py
 import argparse
 import sys
-from src.commands import producer, consumer, misc, script_manager
+from src.commands import producer, consumer, misc, script_manager, dir_registry
 
 def main():
     # Check if first argument is a registered script (before argparse kicks in)
@@ -11,6 +11,7 @@ def main():
         built_in_commands = {
             "init-lib", "register", "publish", "install", "update", "list",
             "init-script", "register-script", "list-scripts",
+            "cdr", "register-dir", "remove-dir", "list-dirs", "cdr-init",
             "help", "--help", "-h",
             "--version", "-v"
         }
@@ -46,6 +47,23 @@ def main():
     subparsers.add_parser("register-script", help="Register script from nlpm-script.yaml")
     subparsers.add_parser("list-scripts", help="List all registered global scripts")
 
+    # -- DIRECTORY REGISTRY COMMANDS --
+    p_cdr = subparsers.add_parser("cdr", help="Get directory path for alias (use with shell wrapper)")
+    p_cdr.add_argument("alias", help="Directory alias to look up")
+
+    p_reg_dir = subparsers.add_parser("register-dir", help="Register directory alias")
+    p_reg_dir.add_argument("alias", help="Alias name for the directory")
+    p_reg_dir.add_argument("--path", help="Directory path (default: current directory)")
+    p_reg_dir.add_argument("--force", action="store_true", help="Overwrite existing alias")
+
+    p_rm_dir = subparsers.add_parser("remove-dir", help="Remove a directory alias")
+    p_rm_dir.add_argument("alias", help="Alias to remove")
+
+    subparsers.add_parser("list-dirs", help="List all registered directory aliases")
+
+    p_init = subparsers.add_parser("cdr-init", help="Output shell integration code")
+    p_init.add_argument("shell", choices=["ps", "powershell", "cmd"], help="Shell type (ps, cmd)")
+
     args = parser.parse_args()
 
     # Dispatch built-in commands
@@ -67,6 +85,16 @@ def main():
         script_manager.register_script(args)
     elif args.command == "list-scripts":
         script_manager.list_scripts(args)
+    elif args.command == "cdr":
+        dir_registry.get_dir(args)
+    elif args.command == "register-dir":
+        dir_registry.register_dir(args)
+    elif args.command == "remove-dir":
+        dir_registry.remove_dir(args)
+    elif args.command == "list-dirs":
+        dir_registry.list_dirs(args)
+    elif args.command == "cdr-init":
+        dir_registry.init_shell(args)
 
 if __name__ == "__main__":
     try:

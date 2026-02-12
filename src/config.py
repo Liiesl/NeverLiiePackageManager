@@ -15,3 +15,6 @@ LOCK_FILE = "nlpm.lock"
 LIB_CONFIG_FILE = "nlpm.lib.yaml"
 SCRIPT_CONFIG_FILE = "nlpm-script.yaml"  # Config template for script registration
 SCRIPT_CONFIG_FILE = "nlpm-script.yaml"
+
+# Directory alias registry for cdr command
+CDR_REGISTRY_FILE = NLPM_HOME / "cdr_registry.json"
