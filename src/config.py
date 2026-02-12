@@ -1,6 +1,12 @@
 # src/config.py
 from pathlib import Path
 
+def get_version():
+    version_file = Path(__file__).parent.parent / "VERSION"
+    return version_file.read_text().strip()
+
+VERSION = get_version()
+
 # Base Paths
 NLPM_HOME = Path.home() / ".nlpm"
 # We no longer use TOWN_DIR for folders, but we keep the variable 

@@ -96,7 +96,8 @@ def register_script(args):
     # Check for reserved names (built-in commands)
     reserved_commands = {
         "init", "list", "register", "publish", "install", "update",
-        "cdr", "remove-dir", "cdr-init", "help", "--help", "-h"
+        "cdr", "remove-dir", "cdr-init", "help", "--help", "-h",
+        "--version", "-v"
     }
     
     if name in reserved_commands:

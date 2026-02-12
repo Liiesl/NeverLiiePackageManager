@@ -2,16 +2,21 @@
 import argparse
 import sys
 from src.commands import producer, consumer, misc, script_manager, dir_registry
+from src import config
 
 def main():
     if len(sys.argv) > 1:
         potential_script = sys.argv[1]
+        
+        if potential_script in ("--version", "-v"):
+            print(f"nlpm {config.VERSION}")
+            sys.exit(0)
+        
         built_in_commands = {
             "init", "list", "register",
             "publish", "install", "update",
             "cdr", "remove-dir", "cdr-init",
-            "help", "--help", "-h",
-            "--version", "-v"
+            "help", "--help", "-h"
         }
         
         if potential_script not in built_in_commands and not potential_script.startswith("-"):
